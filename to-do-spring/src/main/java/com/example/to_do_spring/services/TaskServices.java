@@ -36,8 +36,8 @@ public class TaskServices {
 
     public Task updateTask(Long id, TaskRequest updatedTask) {
         Task task = findById(id);
-        task.setDescription(updatedTask.getDescription());
-        task.setConcluido(updatedTask.isConcluido());
+        task.setDescription(updatedTask.description());
+        task.setConcluido(updatedTask.concluido());
         return repository.save(task);
     }
 }

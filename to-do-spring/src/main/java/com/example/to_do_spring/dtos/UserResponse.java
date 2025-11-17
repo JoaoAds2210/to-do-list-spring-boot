@@ -1,26 +1,18 @@
 package com.example.to_do_spring.dtos;
 
-import lombok.*;
+public record UserResponse(
+        Long id,
+        String username,
+        String cpf
+) {
 
-
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-public class UserResponse {
-
-    private Long id;
-    private String username;
-    private String cpf;
-
+    // Construtor com username e cpf
     public UserResponse(String username, String cpf) {
-        this.username = username;
-        this.cpf = cpf;
+        this(null, username, cpf);
     }
 
+    // Construtor com id e username
     public UserResponse(Long id, String username) {
-        this.id = id;
-        this.username = username;
+        this(id, username, null);
     }
 }

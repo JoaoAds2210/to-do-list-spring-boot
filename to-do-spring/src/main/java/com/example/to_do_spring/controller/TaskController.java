@@ -24,8 +24,8 @@ public class TaskController {
     @PostMapping
     public ResponseEntity<TaskResponse> createTask(@Valid @RequestBody TaskRequest request) {
         Task task = new Task();
-        task.setDescription(request.getDescription());
-        task.setConcluido(request.isConcluido());
+        task.setDescription(request.description());
+        task.setConcluido(request.concluido());
 
         Task savedTask = services.createTask(task);
 

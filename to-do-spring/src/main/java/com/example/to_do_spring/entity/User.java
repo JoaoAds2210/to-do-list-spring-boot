@@ -1,10 +1,9 @@
 package com.example.to_do_spring.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table (name="users")
@@ -22,8 +21,13 @@ public class User {
     @Column(name = "nome", nullable = false)
     private String username;
 
+    @Column(nullable = false)
+    private String senha;
+
     @Column(name = "cpf", unique = true, nullable = false)
     private String cpf;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> tasks;
 
 }

@@ -26,15 +26,13 @@ public class UserController {
     //CRUD com HTTP
     @PostMapping
     public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserRequest request){
-        User user = new User();
-        user.setUsername(request.getUsername());
-        user.setCpf(user.getCpf());
 
-        User saveUser = services.createUser(user);
+        User saved = services.createUser(request);
 
         UserResponse response = new UserResponse(
-                saveUser.getId(),
-                saveUser.getUsername()
+                saved.getId(),
+                saved.getUsername(),
+                saved.getCpf()
         );
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -68,13 +66,16 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponse> updateUser(@PathVariable Long id, @RequestBody UserRequest request){
-        User user = services.updateUser(id, request);
-        user.setUsername(user.getUsername());
+    public ResponseEntity<UserResponse> update(
+            @PathVariable Long id,
+            @Valid @RequestBody UserRequest request) {
+
+        User updated = services.updateUser(id, request);
 
         UserResponse response = new UserResponse(
-                user.getId(),
-                user.getUsername()
+                updated.getId(),
+                updated.getUsername(),
+                updated.getCpf()
         );
 
         return ResponseEntity.ok(response);

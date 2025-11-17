@@ -1,10 +1,8 @@
 package com.example.to_do_spring.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.engine.spi.Status;
 
 @Entity
 @Table(name = "tasks")
@@ -21,7 +19,11 @@ public class Task {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "concluido", nullable = false)
-    private boolean concluido;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.SAVING;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }
